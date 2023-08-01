@@ -11,8 +11,11 @@ const withPWA = require("next-pwa")({
 
 const nextConfig = withPWA({
   eslint: {
-    dirs: ['app'],
+    dirs: ['app', 'utils'],
     ignoreDuringBuilds: true,
+  },
+  env: {
+    NEXT_PUBLIC_YOUTUBE_DATA_API_KEY: process.env.YOUTUBE_DATA_API_KEY,
   },
 });
 module.exports = nextConfig;
