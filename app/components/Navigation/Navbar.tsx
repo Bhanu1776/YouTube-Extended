@@ -1,29 +1,36 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Turn as Hamburger } from 'hamburger-react';
 import Link from 'next/link';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { AiOutlineSearch, AiOutlineClose } from 'react-icons/ai';
 import { ImMic } from 'react-icons/im';
 import { BsCameraVideo, BsBell } from 'react-icons/bs';
-import { GiHamburgerMenu } from 'react-icons/gi';
 import { IoAppsSharp } from 'react-icons/io5';
+import { LuAlignLeft, LuAlignJustify } from 'react-icons/lu';
+
+import { toggleMenu } from '@store/Slices/appSlice';
+import { RootState } from '@store/store';
 
 const Navbar = () => {
-  const [isOpen, setOpen] = useState(false);
+  const dispatch = useDispatch();
+
+  const toggleSidebar = () => {
+    dispatch(toggleMenu());
+  };
+
+  const isMenuOpen = useSelector((store: RootState) => store.app.isMenuOpen);
+
   return (
     <header className="sticky top-0 z-50  flex h-14 items-center justify-between bg-white/5 bg-opacity-10 px-14 backdrop-blur-3xl backdrop-filter">
       {/* //* Logo (Left) */}
       <div className="flex items-center gap-8 text-2xl">
-        <div className="cursor-pointer rounded-full  hover:bg-gray-800 hover:text-pink-600">
-          <Hamburger
-            toggled={isOpen}
-            toggle={setOpen}
-            size={20}
-            direction="right"
-          />
-          {/* <GiHamburgerMenu /> */}
+        <div className="cursor-pointer rounded-full p-2 hover:bg-[#272626] hover:text-pink-600">
+          {isMenuOpen === false ? (
+            <LuAlignJustify onClick={() => toggleSidebar()} />
+          ) : (
+            <LuAlignLeft onClick={() => toggleSidebar()} />
+          )}
         </div>
         <Link href="/">
           <div className="flex items-center justify-center gap-1">
