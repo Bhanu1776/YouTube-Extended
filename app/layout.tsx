@@ -2,8 +2,9 @@ import 'styles/globals.css';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import classNames from 'classnames';
 import { Analytics } from '@vercel/analytics/react';
+import { Providers } from '@/Providers';
 import Navbar from '@components/Navigation/Navbar';
-import Sidebar from './components/Navigation/Sidebar';
+import Sidebar from '@components/Navigation/Sidebar';
 
 export const metadata = {
   title: 'Youtube',
@@ -109,9 +110,13 @@ export default function RootLayout({
           'debug-screens': process.env.NODE_ENV === 'development',
         })}
       >
-        <Navbar />
-        <Sidebar />
-        {children}
+        <Providers>
+          <Navbar />
+          <div className="flex">
+            <Sidebar />
+            {children}
+          </div>
+        </Providers>
         <Analytics />
       </body>
     </html>
