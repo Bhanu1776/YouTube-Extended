@@ -1,4 +1,6 @@
-import { useSelector } from 'react-redux';
+'use client';
+
+import { useAppSelector } from '@store/hooks';
 import { RootState } from '@store/store';
 import {
   mainLinks,
@@ -10,7 +12,7 @@ import {
 
 export default function Sidebar() {
   //* Subscribing to specific part of the store i.e appSlice ka isMenuOpen state
-  const isMenuOpen = useSelector((store: RootState) => store.app.isMenuOpen);
+  const isMenuOpen = useAppSelector((store: RootState) => store.app.isMenuOpen);
 
   //* Early return ==> If isMenuOpen is False don't activate sidebar
   if (!isMenuOpen) return null;
