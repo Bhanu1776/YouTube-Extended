@@ -1,25 +1,25 @@
 'use client';
 
 import Link from 'next/link';
-import { useDispatch, useSelector } from 'react-redux';
 
 import { AiOutlineSearch, AiOutlineClose } from 'react-icons/ai';
 import { ImMic } from 'react-icons/im';
 import { BsCameraVideo, BsBell } from 'react-icons/bs';
 import { IoAppsSharp } from 'react-icons/io5';
 import { LuAlignLeft, LuAlignJustify } from 'react-icons/lu';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
 
 import { toggleMenu } from '@store/Slices/appSlice';
 import { RootState } from '@store/store';
 
 const Navbar = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const toggleSidebar = () => {
     dispatch(toggleMenu());
   };
 
-  const isMenuOpen = useSelector((store: RootState) => store.app.isMenuOpen);
+  const isMenuOpen = useAppSelector((store: RootState) => store.app.isMenuOpen);
 
   return (
     <header className="sticky top-0 z-50  flex h-14 items-center justify-between bg-white/5 bg-opacity-10 px-14 backdrop-blur-3xl backdrop-filter">
@@ -33,7 +33,7 @@ const Navbar = () => {
           )}
         </div>
         <Link href="/">
-          <div className="flex items-center justify-center gap-1">
+          <div className="flex select-none items-center justify-center gap-1">
             {/* <BsYoutube className="text-3xl text-red-600" /> */}
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/8/84/Youtubevanced.png"
