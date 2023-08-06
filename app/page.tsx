@@ -1,9 +1,11 @@
+import ButtonList from './components/Homepage/ButtonList';
+import VideoContainer from './components/Homepage/VideoContainer';
+
 export default function Home() {
   return (
     <main>
-      <h1 className="text-center text-3xl font-bold text-indigo-600">
-        Hello World
-      </h1>
+      <ButtonList />
+      <VideoContainer />
     </main>
   );
 }
