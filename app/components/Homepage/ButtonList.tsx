@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '@store/hooks';
 import { RootState } from '@store/store';
 
 const List: string[] = [
@@ -50,7 +50,7 @@ const Button = ({ name }: ButtonProps) => (
 
 const ButtonList = () => {
   // const { isMenuOpen } = store.getState().app;
-  const isMenuOpen = useSelector((store: RootState) => store.app.isMenuOpen);
+  const isMenuOpen = useAppSelector((store: RootState) => store.app.isMenuOpen);
 
   return (
     <section className="">
