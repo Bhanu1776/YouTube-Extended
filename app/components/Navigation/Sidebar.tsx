@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useAppSelector } from '@store/hooks';
 import { RootState } from '@store/store';
 import {
@@ -18,7 +19,7 @@ export default function Sidebar() {
   if (!isMenuOpen) return null;
 
   return (
-    <aside className="sidebar w-[18%] overflow-auto bg-[#181818] pb-8 pl-2 pr-3">
+    <aside className="sidebar w-[18%] min-w-[18%] overflow-auto bg-[#181818] pb-8 pl-2 pr-3">
       {/* //* Main Links  */}
 
       <ul className="mt-2 flex flex-col border-b-2 border-gray-700">
@@ -29,10 +30,10 @@ export default function Sidebar() {
               name === 'Home' ? 'bg-[#393838]' : ''
             }`}
           >
-            <a href="/" className="flex items-center gap-5">
+            <Link href="/" className="flex items-center gap-5">
               {icon}
               <span className="text-sm font-thin tracking-wider">{name}</span>
-            </a>
+            </Link>
           </li>
         ))}
       </ul>
@@ -45,10 +46,10 @@ export default function Sidebar() {
             key={name}
             className="rounded-xl py-3  pl-6 hover:bg-[#393838] hover:text-pink-500"
           >
-            <a href="/" className="flex items-center gap-5">
+            <Link href="#" className="flex items-center gap-5">
               {icon}
               <span className="text-sm tracking-wider">{name}</span>
-            </a>
+            </Link>
           </li>
         ))}
       </ul>
@@ -61,10 +62,10 @@ export default function Sidebar() {
             key={name}
             className="rounded-xl py-3  pl-6 hover:bg-[#393838] hover:text-pink-500"
           >
-            <a href="/" className="flex items-center gap-5">
+            <Link href="#" className="flex items-center gap-5">
               {icon}
               <span className="text-sm tracking-wider">{name}</span>
-            </a>
+            </Link>
           </li>
         ))}
       </ul>
@@ -77,10 +78,10 @@ export default function Sidebar() {
             key={name}
             className="rounded-xl py-3  pl-6 hover:bg-[#393838] hover:text-pink-500"
           >
-            <a href="/" className="flex items-center gap-5">
+            <Link href="#" className="flex items-center gap-5">
               {icon}
               <span className="text-sm tracking-wider">{name}</span>
-            </a>
+            </Link>
           </li>
         ))}
       </ul>
