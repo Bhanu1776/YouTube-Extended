@@ -53,7 +53,7 @@ const ButtonList = () => {
   const isMenuOpen = useAppSelector((store: RootState) => store.app.isMenuOpen);
 
   return (
-    <section className="">
+    <section className="mb-3 ml-8">
       <button
         type="button"
         className="m-3 rounded-lg bg-[#282727] px-5 py-[0.35rem]"
