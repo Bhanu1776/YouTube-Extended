@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 import { Item } from '@Types/HomepageTypes';
 
 const VideoCard = ({ info }: { info: Item }) => {
@@ -28,21 +27,17 @@ const VideoCard = ({ info }: { info: Item }) => {
       </div>
       <div className="flex gap-2">
         <div className="min-w-fit">
-          <Link href="#">
+          <p>
             <img src={url} alt="channel" className="h-9 w-9 rounded-full" />
-          </Link>
+          </p>
         </div>
         <div>
           <h3>
-            <Link href="#" className=" line-clamp-2 truncate">
-              {title}
-            </Link>
+            <p className=" line-clamp-2 truncate">{title}</p>
           </h3>
           <div className="text-sm text-gray-400">
             <div>
-              <Link href="#" className="text-pink-600">
-                {channelTitle}
-              </Link>
+              <p className="text-pink-600">{channelTitle}</p>
             </div>
             <div>
               <span className="after:mx-1 after:content-['•']">
