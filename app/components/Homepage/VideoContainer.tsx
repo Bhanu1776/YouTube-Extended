@@ -2,28 +2,28 @@
 
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import Link from 'next/link';
 import { YOUTUBE_VIDEOS_API } from '@/utils/constants';
 import { Item } from '@/Types/HomepageTypes';
+import useFetchVideosData from '@/Hooks/useFetchVideosData';
 import Spinner from '@/loading';
-import VideoCard from './VideoCard';
+import VideoCard from '@components/Homepage/VideoCard';
 
 const VideoContainer = () => {
   const [videos, setVideos] = useState([]);
 
-  //* Using TanStack React Query to Fetch data
-  const { isLoading, isError, error } = useQuery({
-    // useQuery will take two args (name, callback func where we are supposed to fetch data) and if we want to increase cache time we can add one more arg with object and increase cacheTime: 500000
-    queryKey: ['HomePage Videos'],
-    queryFn: () => fetch(YOUTUBE_VIDEOS_API).then((res) => res.json()), //* Abstracted Business logic(API)
+  // ? SideEffect, Called after data is fetched
+  const onSuccess = (videoData: any) => {
+    setVideos(videoData.items);
+  };
 
-    //* This will run only when data is fetched
-    onSuccess: (videoData) => {
-      setVideos(videoData.items);
-    },
-  });
+  // ? useFetchVideosData is the custom Hook(Purpose is to fetch Data)
+  const { isLoading, isError, error } = useFetchVideosData(
+    'HomePage Videos',
+    YOUTUBE_VIDEOS_API,
+    onSuccess,
+  );
 
   if (isLoading) return <Spinner />;
 
