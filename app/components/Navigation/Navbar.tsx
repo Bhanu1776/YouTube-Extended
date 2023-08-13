@@ -22,8 +22,8 @@ const Navbar = () => {
   const isMenuOpen = useAppSelector((store: RootState) => store.app.isMenuOpen);
 
   return (
-    <header className="sticky top-0 z-50  flex h-14 items-center justify-between bg-white/5 bg-opacity-10 px-14 backdrop-blur-3xl backdrop-filter">
-      {/* //* Logo (Left) */}
+    <header className="sticky top-0 z-50  flex h-14 items-center justify-between bg-black bg-opacity-60 px-14 backdrop-blur-3xl backdrop-filter">
+      {/* //? Logo (Left) */}
       <div className="flex items-center gap-8 text-2xl">
         <div className="cursor-pointer rounded-full p-2 hover:bg-[#272626] hover:text-pink-600">
           {isMenuOpen === false ? (
@@ -47,7 +47,7 @@ const Navbar = () => {
         </Link>
       </div>
 
-      {/* //* Search (Center) */}
+      {/* //? Search (Center) */}
       <div className="flex items-center justify-center gap-5">
         <form
           onSubmit={(e) => {
@@ -87,7 +87,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* //* Account (Right) */}
+      {/* //? Account (Right) */}
       <div className="flex items-center gap-5 text-xl">
         <BsCameraVideo className="cursor-pointer hover:text-pink-600" />
         <IoAppsSharp className="cursor-pointer hover:text-pink-600" />
