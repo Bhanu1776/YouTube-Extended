@@ -3,7 +3,7 @@ import 'styles/globals.css';
 import classNames from 'classnames';
 import { Analytics } from '@vercel/analytics/react';
 import { Providers } from '@/Providers';
-import Navbar from '@components/Navigation/Navbar';
+import Navbar from '@/components/Navigation/Navbar/Navbar';
 import Sidebar from '@components/Navigation/Sidebar';
 
 export const metadata = {
