@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable prettier/prettier */
 
 'use client';
@@ -6,28 +7,56 @@ import { useEffect, useState } from 'react';
 import { AiOutlineSearch, AiOutlineClose } from 'react-icons/ai';
 import { ImMic } from 'react-icons/im';
 import { LuHistory } from 'react-icons/lu';
-import { YOUTUBE_SEARCH_API } from '@/utils/constants';
 import useFetchVideosData from '@/Hooks/useFetchVideosData';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { cacheResults } from '@store/Slices/searchSlice';
+import { RootState } from '@store/store';
+import { SearchSuggestionApiDataType } from '@/Types/SearchSuggestionApiTypes';
+import { YOUTUBE_SEARCH_API } from '@/utils/constants';
 
 const SearchInput = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
+
+  //* Caching the input suggestions to reduce the network calls
+  // On searching the same value again (suppose: k20pro) then suggestions will be pulled from cache not API!
+  const searchCache: { [key: string]: string[] } = useAppSelector(
+    (store: RootState) => store.search,
+  );
+  const dispatch = useAppDispatch();
 
   //* Debouncing
-
-  const { data, refetch } = useFetchVideosData(
+  const onSuccess = (VideoData: SearchSuggestionApiDataType) => {
+    setSuggestions(VideoData[1]);
+    // Once data is fetched we are storing the data in our redux store
+    dispatch(
+      cacheResults({
+        [searchQuery]: VideoData[1],
+      }),
+    );
+  };
+  const { refetch } = useFetchVideosData(
     'Search Suggestions',
     `${YOUTUBE_SEARCH_API}${searchQuery}`,
     false,
+    onSuccess,
   );
 
   useEffect(() => {
-    const timer = setTimeout(() => refetch(), 200);
+    const timer = setTimeout(() => {
+      // Checking if the suggestions are stored in cache(redux store)
+      if (searchCache[searchQuery]) {
+        // searching the searchQuery value as key in an object
+        setSuggestions(searchCache[searchQuery]);
+      } else {
+        refetch();
+      }
+    }, 200);
 
     return () => {
       clearTimeout(timer);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery]);
 
   return (
@@ -77,14 +106,14 @@ const SearchInput = () => {
         {showSuggestions && (
           <div className="fixed w-[30.7rem] cursor-pointer rounded-b-xl border border-zinc-950 bg-zinc-950 bg-opacity-90 text-base shadow-lg backdrop-blur-3xl backdrop-filter">
             <ul>
-              {data &&
-                data[1].map((suggestions: string) =>
-                  suggestions === '' ? null : (
+              {suggestions &&
+                suggestions.map((results: string) =>
+                  results === '' ? null : (
                     <li
-                      key={suggestions}
+                      key={results}
                       className="my-2 flex gap-4 px-5 hover:bg-black hover:text-pink-600"
                     >
-                      <LuHistory className="mt-1 text-lg" /> {suggestions}
+                      <LuHistory className="mt-1 text-lg" /> {results}
                     </li>
                   ),
                 )}
