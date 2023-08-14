@@ -2,7 +2,6 @@
 
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
 import { YOUTUBE_VIDEOS_API } from '@/utils/constants';
 import { Item } from '@/Types/HomepageTypes';
@@ -11,19 +10,11 @@ import Spinner from '@/loading';
 import VideoCard from '@components/Homepage/VideoCard';
 
 const VideoContainer = () => {
-  const [videos, setVideos] = useState([]);
-
-  // ? SideEffect, Called after data is fetched
-  const onSuccess = (videoData: any) => {
-    setVideos(videoData.items);
-  };
-
   // ? useFetchVideosData is the custom Hook(Purpose is to fetch Data)
-  const { isLoading, isError, error } = useFetchVideosData(
+  const { data, isLoading, isError, error } = useFetchVideosData(
     'HomePage Videos',
     YOUTUBE_VIDEOS_API,
     true,
-    onSuccess,
   );
 
   if (isLoading) return <Spinner />;
@@ -32,7 +23,7 @@ const VideoContainer = () => {
 
   return (
     <div className="ml-10 flex flex-wrap gap-4">
-      {videos.map((item: Item) => (
+      {data?.items?.map((item: Item) => (
         <Link href={`/watch?v=${item.id}`}>
           <VideoCard key={item.id} info={item} />
         </Link>
