@@ -22,6 +22,7 @@ const VideoContainer = () => {
   const { isLoading, isError, error } = useFetchVideosData(
     'HomePage Videos',
     YOUTUBE_VIDEOS_API,
+    true,
     onSuccess,
   );
 
