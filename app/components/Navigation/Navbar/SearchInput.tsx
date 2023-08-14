@@ -11,6 +11,7 @@ import useFetchVideosData from '@/Hooks/useFetchVideosData';
 
 const SearchInput = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
   //* Debouncing
 
@@ -38,7 +39,9 @@ const SearchInput = () => {
       >
         <div
           className={`flex h-10 items-center rounded-3xl ${
-            searchQuery && 'rounded-bl-none border-0 hover:border-none'
+            showSuggestions &&
+            searchQuery &&
+            'rounded-bl-none border-0 hover:border-none'
           } border-2 border-zinc-900 bg-zinc-900 px-4 pr-0 hover:border-pink-600`}
         >
           <div className="flex items-center gap-4 rounded-3xl  pr-5">
@@ -48,6 +51,9 @@ const SearchInput = () => {
             <input
               type=""
               className="peer h-[98%] w-96 border-none bg-zinc-900 focus:outline-none focus:ring-0"
+              onFocus={() => setShowSuggestions(true)}
+              onBlur={() => setShowSuggestions(false)} // Blur => Focus out
+              placeholder="Search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -66,19 +72,28 @@ const SearchInput = () => {
             <AiOutlineSearch className="text-2xl text-pink-600" />
           </button>
         </div>
-        <div className="fixed w-[30.7rem] cursor-pointer rounded-b-xl border border-zinc-950 bg-zinc-950 bg-opacity-90 text-base shadow-lg backdrop-blur-3xl backdrop-filter">
-          <ul>
-            {data &&
-              data[1].map((suggestions: string) =>
-                suggestions === '' ? null : (
-                  <li className="my-2 flex gap-4 px-5 hover:bg-black hover:text-pink-600">
-                    <LuHistory className="mt-1 text-lg" /> {suggestions}
-                  </li>
-                ),
-              )}
-          </ul>
-        </div>
+
+        {/* //? HeadsUp Suggestions box */}
+        {showSuggestions && (
+          <div className="fixed w-[30.7rem] cursor-pointer rounded-b-xl border border-zinc-950 bg-zinc-950 bg-opacity-90 text-base shadow-lg backdrop-blur-3xl backdrop-filter">
+            <ul>
+              {data &&
+                data[1].map((suggestions: string) =>
+                  suggestions === '' ? null : (
+                    <li
+                      key={suggestions}
+                      className="my-2 flex gap-4 px-5 hover:bg-black hover:text-pink-600"
+                    >
+                      <LuHistory className="mt-1 text-lg" /> {suggestions}
+                    </li>
+                  ),
+                )}
+            </ul>
+          </div>
+        )}
       </form>
+
+      {/* //? Voice Search MIC Icon  */}
       <div className="rounded-full bg-zinc-900 p-3 text-xl ">
         <ImMic className="cursor-pointer hover:text-pink-600" />
       </div>
