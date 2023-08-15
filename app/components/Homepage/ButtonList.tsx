@@ -1,10 +1,14 @@
+/* eslint-disable prettier/prettier */
+
 'use client';
 
 import React from 'react';
-import { useAppSelector } from '@store/hooks';
+import { useAppSelector, useAppDispatch } from '@store/hooks';
 import { RootState } from '@store/store';
+import { filterVideos } from '@store/Slices/filterAppSlice';
 
 const List: string[] = [
+  'All',
   'Nextjs',
   'Cricket',
   'Music',
@@ -14,11 +18,11 @@ const List: string[] = [
   'Live',
   'Raftaar',
   'Kr$na',
-  'Karma',
   'India',
 ];
 
 const List2: string[] = [
+  'All',
   'Nextjs',
   'Cricket',
   'Music',
@@ -28,7 +32,6 @@ const List2: string[] = [
   'Live',
   'Raftaar',
   'Kr$na',
-  'Karma',
   'India',
   'IPL',
   'Dhoni',
@@ -39,14 +42,34 @@ type ButtonProps = {
   name: string;
 };
 
-const Button = ({ name }: ButtonProps) => (
-  <button
-    type="button"
-    className="m-3 rounded-lg px-4 py-[0.35rem] hover:bg-[#282727]"
-  >
-    {name}
-  </button>
-);
+const Button = ({ name }: ButtonProps) => {
+  const dispatch = useAppDispatch();
+  const searchTerm: string = useAppSelector(
+    (store: RootState) => store.filterApp.data,
+  );
+
+  return name === 'All' ? (
+    <button
+      type="button"
+      className={`m-3 rounded-lg px-5 py-[0.35rem] ${
+        searchTerm === '' ? 'bg-[#28282bbd]' : 'hover:bg-[#282727]'
+      }`}
+      onClick={() => dispatch(filterVideos(''))}
+    >
+      {name}
+    </button>
+  ) : (
+    <button
+      type="button"
+      className={`m-3 rounded-lg px-5 py-[0.35rem] ${
+        searchTerm === name ? 'bg-[#1c1b1b]' : 'hover:bg-[#282727]'
+      }`}
+      onClick={() => dispatch(filterVideos(name))}
+    >
+      {name}
+    </button>
+  );
+};
 
 const ButtonList = () => {
   // const { isMenuOpen } = store.getState().app;
@@ -54,13 +77,6 @@ const ButtonList = () => {
 
   return (
     <section className="mb-3 ml-8">
-      <button
-        type="button"
-        className="m-3 rounded-lg bg-[#282727] px-5 py-[0.35rem]"
-      >
-        All
-      </button>
-
       {isMenuOpen === true
         ? List.map((item) => <Button name={item} key={item} />)
         : List2.map((item) => <Button name={item} key={item} />)}
