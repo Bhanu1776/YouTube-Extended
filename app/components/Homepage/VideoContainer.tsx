@@ -56,7 +56,7 @@ const VideoContainer = () => {
           }
           key={item.id}
         >
-          <VideoCard key={item.id} info={item} />
+          <VideoCard info={item} />
         </Link>
       ))}
     </div>
