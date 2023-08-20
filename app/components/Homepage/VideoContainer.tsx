@@ -5,7 +5,6 @@
 
 import Link from 'next/link';
 import { useEffect } from 'react';
-import { Item } from '@/Types/HomepageTypes';
 import useFetchVideosData from '@/Hooks/useFetchVideosData';
 import Spinner from '@/loading';
 import VideoCard from '@components/Homepage/VideoCard';
@@ -48,8 +47,15 @@ const VideoContainer = () => {
 
   return (
     <div className="ml-10 flex flex-wrap gap-4">
-      {data?.items?.map((item: Item) => (
-        <Link href={`/watch?v=${item.id}`}>
+      {data?.items?.map((item: any) => (
+        <Link
+          href={
+            searchTerm === ''
+              ? `/watch?v=${item.id}`
+              : `/watch?v=${item.id.videoId}`
+          }
+          key={item.id}
+        >
           <VideoCard key={item.id} info={item} />
         </Link>
       ))}
