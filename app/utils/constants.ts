@@ -7,3 +7,5 @@ export const YOUTUBE_SEARCH_API: string =
   'https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=';
 
 export const YOUTUBE_FILTER_API = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=15&key=${process.env.NEXT_PUBLIC_YOUTUBE_DATA_API_KEY}`;
+
+// export const YOUTUBE_LIVECHAT_API = `https://youtube.googleapis.com/youtube/v3/liveChat/messages?key=${process.env.NEXT_PUBLIC_YOUTUBE_DATA_API_KEY}`;
