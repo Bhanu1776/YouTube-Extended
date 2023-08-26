@@ -2,24 +2,17 @@
 
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import useFetchVideosData from '@/Hooks/useFetchVideosData';
 import { YOUTUBE_API_URL } from '@/utils/constants';
 import ChatMessage from '@components/Watchpage/ChatMessage';
 import { VideoDataType } from '@/Types/VideoDataTypes';
 import { ChatMessageTypes, Item as ItemTypes } from '@Types/ChatMessageTypes';
-// import { useAppDispatch, useAppSelector } from '@store/hooks';
-// import { addMessage } from '@store/Slices/chatSlice';
-// import { RootState } from '@store/store';
 
 const Livechat = () => {
   const [activeLiveChatId, setActiveLiveChatId] = useState<string>('');
   const [messages, setMessages] = useState<ItemTypes[]>([]);
-  // const dispatch = useAppDispatch();
-  // const chatMessages = useAppSelector(
-  //   (store: RootState) => store.chat.messages,
-  // );
   const searchParams = useSearchParams();
   const VideoID = searchParams.get('v');
 
@@ -49,24 +42,6 @@ const Livechat = () => {
     !!activeLiveChatId, // ? Dependent API call
     Success,
   );
-
-  // const { isError } = useQuery({
-  //   queryKey: ['Fetching Live chat'],
-  //   queryFn: () => fetch(LiveChatAPIData).then((res) => res.json()),
-  //   refetchInterval: 2000,
-  //   enabled: !!activeLiveChatId,
-  //   onSuccess,
-  //   cacheTime: 1000,
-  // });
-
-  // //* API Polling
-  //   useEffect(() => {
-  //     const TimeInterval = setInterval(() => {
-  //       dispatch(addMessage(messages));
-  //     }, 2000);
-
-  //     return () => clearInterval(TimeInterval);
-  //   }, []);
 
   //* Error handling
   if (!activeLiveChatId) return null;
