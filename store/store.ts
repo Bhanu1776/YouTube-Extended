@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import appSlice from '@store/Slices/appSlice';
 import searchSlice from '@store/Slices/searchSlice';
 import filterAppSlice from '@store/Slices/filterAppSlice';
+import chatSlice from './Slices/chatSlice';
 
 //* Creating Store
 const store = configureStore({
@@ -9,6 +10,7 @@ const store = configureStore({
     app: appSlice,
     search: searchSlice,
     filterApp: filterAppSlice,
+    chat: chatSlice,
   },
 });
 
