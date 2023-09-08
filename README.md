@@ -19,14 +19,14 @@ Youtube-Extended represents the future of video streaming platforms. I've combin
 
 ## Features that Set Youtube-Extended Apart ✨
 
-📍 The finest alternative to YouTube built on Config Driven UI!  
-📍 You can't dare to move your eyes back in Aesthetic Dark mode.  
-📍 Improving UX by implementing Shimmer UI.  
-📍 Seamlessly integrated the YouTube API to offer you access to an extensive library of videos. It's like having YouTube at your fingertips!  
-📍 Thanks to React Query, it elevated performance by caching network calls. Say goodbye to sluggish loading times!  
-📍 Search feature is lightning-fast, thanks to debouncing and caching. Find your favorite videos in the blink of an eye.  
-📍 Utilizing Api polling, a live chat functionality is developed.  
-📍 Awesome Nested comments using recursion just like Reddit  
+📍 The finest alternative to YouTube built on `Config Driven UI`!  
+📍 You can't dare to move your eyes back in `Aesthetic Dark mode`.  
+📍 Improved UX by implementing `Shimmer UI`.  
+📍 Seamlessly integrated the `YouTube API` to offer you access to an extensive library of videos.  
+📍 Thanks to `React Query`, it elevated performance by caching network calls. Say goodbye to sluggish loading!  
+📍 Search feature is lightning-fast, thanks to `debouncing` and `caching`. Find your favorite videos in the blink of an eye.  
+📍 Utilizing Api polling, a `live chat` functionality is developed.  
+📍 Awesome `Nested comments` using recursion just like Reddit  
 📍 Although it's a Dynamic, Highly Scalable and Industry Level Application.  
 
 ## Screenshots 📸
