@@ -20,15 +20,36 @@ const VideoCard = ({ info }: { info: Item }) => {
         <span className="absolute bottom-3 right-3 z-10 bg-gray-900 px-2 py-0.5 text-sm">
           {duration}
         </span>
-        <img
-          src={url}
-          className="w-90 h-48 select-none rounded-2xl"
-          alt="thumbnail"
-        />
+        {url ? (
+          <Image
+            src={url}
+            objectFit="cover"
+            priority
+            quality={80}
+            alt="thumbnail"
+            className="w-90 h-48 select-none rounded-2xl"
+            height={1000}
+            width={1000}
+          />
+        ) : (
+          <div>Loading..</div>
+        )}
       </div>
       <div className="flex gap-2">
         <div className="min-w-fit">
-          <img src={url} alt="channel" className="h-9 w-9 rounded-full" />
+          {url ? (
+            <Image
+              src={url}
+              objectFit="cover"
+              quality={50}
+              alt="channel"
+              className="h-9 w-9 rounded-full"
+              height={1000}
+              width={1000}
+            />
+          ) : (
+            <div>Loading..</div>
+          )}
         </div>
         <div>
           <h3 className="line-clamp-2 font-medium hover:text-pink-600">

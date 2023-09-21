@@ -17,5 +17,14 @@ const nextConfig = withPWA({
   env: {
     NEXT_PUBLIC_YOUTUBE_DATA_API_KEY: process.env.YOUTUBE_DATA_API_KEY,
   },
+  images: {
+    // domains: ['i.ytimg.com'], // Add i.ytimg.com to the list of allowed domains
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'i.ytimg.com',
+      },
+    ],
+  },
 });
 module.exports = nextConfig;
