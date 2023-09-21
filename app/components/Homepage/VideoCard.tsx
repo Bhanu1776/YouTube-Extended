@@ -15,12 +15,12 @@ const VideoCard = ({ info }: { info: Item }) => {
   } = info || undefined;
 
   return (
-    <div className="mx-3 mb-3 flex max-w-[21rem] flex-col gap-3 rounded-2xl">
+    <div className="mx-3 mb-3 flex max-w-[21rem] flex-col gap-3 rounded-2xl duration-150 ease-in hover:scale-105">
       <div className="relative rounded-2xl">
         <span className="absolute bottom-3 right-3 z-10 bg-gray-900 px-2 py-0.5 text-sm">
           {duration}
         </span>
-        {url ? (
+        {url && (
           <Image
             src={url}
             objectFit="cover"
@@ -31,13 +31,11 @@ const VideoCard = ({ info }: { info: Item }) => {
             height={1000}
             width={1000}
           />
-        ) : (
-          <div>Loading..</div>
         )}
       </div>
       <div className="flex gap-2">
         <div className="min-w-fit">
-          {url ? (
+          {url && (
             <Image
               src={url}
               objectFit="cover"
@@ -47,8 +45,6 @@ const VideoCard = ({ info }: { info: Item }) => {
               height={1000}
               width={1000}
             />
-          ) : (
-            <div>Loading..</div>
           )}
         </div>
         <div>
