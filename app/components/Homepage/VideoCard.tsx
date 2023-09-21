@@ -1,5 +1,6 @@
 import React from 'react';
 import { Item } from '@Types/HomepageTypes';
+import Image from 'next/image';
 
 const VideoCard = ({ info }: { info: Item }) => {
   // ? Destructuring the api values
@@ -14,7 +15,7 @@ const VideoCard = ({ info }: { info: Item }) => {
   } = info || undefined;
 
   return (
-    <div className="w-70 mb-3 flex h-60 flex-col gap-3 rounded-2xl p-0">
+    <div className="mx-3 mb-3 flex max-w-[21rem] flex-col gap-3 rounded-2xl">
       <div className="relative rounded-2xl">
         <span className="absolute bottom-3 right-3 z-10 bg-gray-900 px-2 py-0.5 text-sm">
           {duration}
@@ -27,24 +28,18 @@ const VideoCard = ({ info }: { info: Item }) => {
       </div>
       <div className="flex gap-2">
         <div className="min-w-fit">
-          <p>
-            <img src={url} alt="channel" className="h-9 w-9 rounded-full" />
-          </p>
+          <img src={url} alt="channel" className="h-9 w-9 rounded-full" />
         </div>
         <div>
-          <h3>
-            <p className=" line-clamp-2 truncate">{title}</p>
+          <h3 className="line-clamp-2 font-medium hover:text-pink-600">
+            {title}
           </h3>
           <div className="text-sm text-gray-400">
-            <div>
-              <p className="text-pink-600">{channelTitle}</p>
-            </div>
-            <div>
-              <span className="after:mx-1 after:content-['•']">
-                {viewCount} views
-              </span>
-              {/* <span>{data.videoAge}</span> */}
-            </div>
+            <p className="text-pink-600">{channelTitle}</p>
+            <span className="after:mx-1 after:content-['•']">
+              {viewCount} views
+            </span>
+            {/* <span>{data.videoAge}</span> */}
           </div>
         </div>
       </div>
